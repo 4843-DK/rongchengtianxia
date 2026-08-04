@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>胡建仁 · 办公电脑桌面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e6e9ef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            min-height: 100vh;
+            font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+        }
+
+        .global-search {
+            width: 100%;
+            max-width: 880px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .global-search input {
+            width: 200px;
+            padding: 6px 12px;
+            font-size: 13px;
+            border: 1px solid #c8d0d8;
+            background: #ffffff;
+            color: #1a1a1a;
+            outline: none;
+            border-radius: 2px;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .global-search input:focus {
+            border-color: #3a6a9a;
+            box-shadow: 0 0 0 2px rgba(58, 106, 154, 0.10);
+        }
+
+        .global-search input::placeholder {
+            color: #9aa8b8;
+            font-size: 12px;
+        }
+
+        .global-search button {
+            padding: 6px 16px;
+            font-size: 13px;
+            border: 1px solid #c8d0d8;
+            background: #ffffff;
+            color: #1a1a1a;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.2s, border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .global-search button:hover {
+            background: #f0f2f4;
+            border-color: #b0b8c4;
+        }
+
+        .desktop-container {
+            max-width: 880px;
+            width: 100%;
+            background: #1a2a3a;
+            padding: 12px 16px 10px 16px;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .screen {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #0a1a2a;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: background 0.6s ease;
+        }
+
+        /* 桌面顶部标签 */
+        .desktop-tab {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 20;
+            backdrop-filter: blur(4px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            user-select: none;
+        }
+
+        .desktop-tab .tab-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .desktop-tab .tab-label .highlight-tab {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+        }
+
+        .screen.underworld .desktop-tab {
+            background: rgba(40, 10, 10, 0.6);
+            border-bottom: 1px solid rgba(180, 60, 60, 0.15);
+        }
+
+        .screen.underworld .desktop-tab .tab-label {
+            color: rgba(200, 120, 120, 0.7);
+        }
+
+        .screen.underworld .desktop-tab .tab-label .highlight-tab {
+            color: rgba(220, 150, 150, 0.9);
+        }
+
+        .wallpaper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a3a5a 0%, #0d2a4a 40%, #1a2a3a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: filter 0.8s ease, background 0.8s ease;
+            overflow: hidden;
+        }
+
+        .wallpaper::before {
+            content: 'Windows 7';
+            position: absolute;
+            bottom: 40px;
+            right: 30px;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.06);
+            letter-spacing: 4px;
+            font-weight: 300;
+            user-select: none;
+        }
+
+        .wallpaper .win7-glow {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background: radial-gradient(ellipse at center, rgba(80, 160, 220, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .wallpaper .win7-glow2 {
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            bottom: 10%;
+            right: 10%;
+            background: radial-gradient(ellipse at center, rgba(60, 120, 180, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .screen.underworld .wallpaper {
+            filter: brightness(0.55) saturate(0.6);
+            background: linear-gradient(135deg, #0a1a2a 0%, #050a12 50%, #0a121a 100%);
+        }
+
+        .screen.underworld .wallpaper::before {
+            color: rgba(100, 60, 60, 0.08);
+        }
+
+        .desktop-icons {
+            position: absolute;
+            left: 16px;
+            top: 42px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .desktop-icons .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #d0d8e0;
+            font-size: 10px;
+            cursor: default;
+            padding: 2px 4px;
+            border-radius: 3px;
+            transition: opacity 0.6s ease, filter 0.6s ease, background 0.15s;
+            width: 48px;
+        }
+
+        .desktop-icons .icon-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .desktop-icons .icon-item .icon-big {
+            font-size: 20px;
+            display: block;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .desktop-icons .icon-item .icon-label {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 10px;
+            line-height: 1.2;
+            color: #e0e8f0;
+            letter-spacing: 0.3px;
+            margin-top: 1px;
+            text-align: center;
+        }
+
+        .screen.underworld .desktop-icons .icon-item {
+            opacity: 0.5;
+            filter: grayscale(0.6);
+        }
+
+        .notepad-window {
+            position: absolute;
+            top: 14%;
+            right: 8%;
+            width: 48%;
+            height: 66%;
+            background: #fcf8f0;
+            border: 2px solid #2a3a4a;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: filter 0.6s ease;
+        }
+
+        .screen.underworld .notepad-window {
+            filter: brightness(0.85) saturate(0.7);
+        }
+
+        .notepad-window .title-bar {
+            background: linear-gradient(180deg, #2a6bb0 0%, #1a4a8a 100%);
+            padding: 4px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            font-size: 12px;
+            font-family: 'Segoe UI', '宋体', sans-serif;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .notepad-window .title-bar .win-btns {
+            display: flex;
+            gap: 4px;
+        }
+
+        .notepad-window .title-bar .win-btns span {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 12px;
+            text-align: center;
+            line-height: 16px;
+            cursor: default;
+            border-radius: 2px;
+        }
+
+        .notepad-window .title-bar .win-btns span.close:hover {
+            background: #d64a4a;
+            border-color: #d64a4a;
+        }
+
+        .notepad-window .menu-bar {
+            background: #f0ece4;
+            padding: 2px 10px;
+            display: flex;
+            gap: 16px;
+            font-size: 11px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #d0c8b8;
+            flex-shrink: 0;
+            font-family: '宋体', sans-serif;
+        }
+
+        .notepad-window .menu-bar span {
+            cursor: default;
+        }
+
+        .notepad-window .notepad-body {
+            flex: 1;
+            padding: 16px 18px;
+            font-family: '宋体', 'SimSun', serif;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #1a1a1a;
+            background: #fcf8f0;
+            overflow: hidden;
+            transition: background 0.6s ease;
+        }
+
+        .screen.underworld .notepad-window .notepad-body {
+            background: #f0ece0;
+        }
+
+        .notepad-window .notepad-body .note-line {
+            display: block;
+            padding: 2px 0;
+        }
+
+        .notepad-window .notepad-body .note-line .highlight {
+            color: #b31b1b;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .notepad-window .notepad-body .note-line .num {
+            color: #4a5a6a;
+            font-weight: 500;
+            margin-right: 6px;
+        }
+
+        .taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            background: linear-gradient(180deg, #2a3a4a 0%, #1a2a3a 100%);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 8px;
+            border-top: 1px solid #3a4a5a;
+        }
+
+        .taskbar .start-btn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #d0d8e0;
+            font-size: 12px;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 2px 10px 2px 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 2px;
+            cursor: default;
+        }
+
+        .taskbar .start-btn .win-logo {
+            font-size: 14px;
+        }
+
+        .taskbar .taskbar-time {
+            margin-left: auto;
+            color: #c0c8d0;
+            font-size: 11px;
+            font-family: 'Segoe UI', sans-serif;
+            cursor: default;
+        }
+
+        .desktop-footer {
+            margin-top: 14px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .desktop-footer .back-link {
+            color: #3a6a9a;
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .desktop-footer .back-link:hover {
+            border-bottom-color: #3a6a9a;
+        }
+
+        .hint-area {
+            margin-top: 12px;
+            text-align: center;
+            font-size: 12px;
+            color: #8a9aaa;
+            font-family: '宋体', serif;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 700px) {
+            .notepad-window {
+                width: 60%;
+                right: 4%;
+                top: 16%;
+                height: 60%;
+            }
+
+            .notepad-window .notepad-body {
+                font-size: 12px;
+                padding: 10px 12px;
+            }
+
+            .desktop-icons {
+                left: 12px;
+                top: 40px;
+                gap: 4px;
+            }
+
+            .desktop-icons .icon-item .icon-big {
+                font-size: 18px;
+            }
+
+            .desktop-icons .icon-item .icon-label {
+                font-size: 9px;
+            }
+
+            .global-search input {
+                width: 140px;
+                font-size: 12px;
+                padding: 4px 10px;
+            }
+
+            .global-search button {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+
+            .desktop-tab {
+                height: 24px;
+                padding: 0 12px;
+            }
+
+            .desktop-tab .tab-label {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .notepad-window {
+                width: 72%;
+                right: 2%;
+                top: 18%;
+                height: 55%;
+            }
+
+            .notepad-window .notepad-body {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+
+            .notepad-window .title-bar {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+
+            .desktop-icons {
+                left: 8px;
+                top: 36px;
+                gap: 3px;
+            }
+
+            .desktop-icons .icon-item .icon-big {
+                font-size: 16px;
+            }
+
+            .desktop-icons .icon-item .icon-label {
+                font-size: 8px;
+            }
+
+            .taskbar .start-btn {
+                font-size: 10px;
+                padding: 1px 6px 1px 4px;
+            }
+
+            .taskbar .taskbar-time {
+                font-size: 10px;
+            }
+
+            .desktop-tab {
+                height: 22px;
+                padding: 0 10px;
+            }
+
+            .desktop-tab .tab-label {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="global-search">
+        <input type="text" id="searchInput" placeholder="在此处搜索" onkeydown="if(event.key==='Enter'){doSearch();}">
+        <button onclick="doSearch()">搜索</button>
+    </div>
+
+    <div class="desktop-container">
+
+        <div class="screen" id="screen">
+
+            <!-- 桌面顶部标签 -->
+            <div class="desktop-tab" id="desktopTab">
+                <span class="tab-label" id="tabLabel">📂 <span class="highlight-tab">办公桌面</span></span>
+            </div>
+
+            <div class="wallpaper">
+                <div class="win7-glow"></div>
+                <div class="win7-glow2"></div>
+            </div>
+
+            <div class="desktop-icons">
+                <div class="icon-item">
+                    <span class="icon-big">🖥️</span>
+                    <span class="icon-label">回收站</span>
+                </div>
+                <div class="icon-item">
+                    <span class="icon-big">📁</span>
+                    <span class="icon-label">项目资料</span>
+                </div>
+                <div class="icon-item">
+                    <span class="icon-big">📁</span>
+                    <span class="icon-label">财务报告</span>
+                </div>
+                <div class="icon-item">
+                    <span class="icon-big">📁</span>
+                    <span class="icon-label">人事档案</span>
+                </div>
+            </div>
+
+            <div class="notepad-window">
+                <div class="title-bar">
+                    <span>📄 备忘录 - 记事本</span>
+                    <div class="win-btns">
+                        <span>—</span>
+                        <span>□</span>
+                        <span class="close">✕</span>
+                    </div>
+                </div>
+                <div class="menu-bar">
+                    <span>文件</span>
+                    <span>编辑</span>
+                    <span>格式</span>
+                    <span>查看</span>
+                    <span>帮助</span>
+                </div>
+                <div class="notepad-body" id="notepadBody">
+                    <!-- 表世界内容（默认显示） -->
+                    <span class="note-line" id="surfaceNote1"><span class="num">1.</span> <span class="highlight">20080827</span></span>
+                    <span class="note-line" id="surfaceNote2"><span class="num">2.</span> 整理下半年项目预算</span>
+                    <span class="note-line" id="surfaceNote3"><span class="num">3.</span> 确认周五的会议时间</span>
+                    <!-- 里世界内容（默认隐藏） -->
+                    <span class="note-line" id="underworldNote1" style="display:none;"><span class="num">1.</span> <span class="highlight">20080827</span></span>
+                    <span class="note-line" id="underworldNote2" style="display:none;"><span class="num">2.</span> 已与阿赞多取得联系</span>
+                    <span class="note-line" id="underworldNote3" style="display:none;"><span class="num">3.</span> 改造方案已确认，下周开始施工</span>
+                    <!-- 解锁提示（里世界显示） -->
+                    <span class="note-line" id="unlockLine" style="display:none; margin-top:8px; color:#6a7a8a; font-style:italic; font-size:13px;">已解锁。搜索框输入密钥可以切换文档视图。</span>
+                </div>
+            </div>
+
+            <div class="taskbar">
+                <div class="start-btn">
+                    <span class="win-logo">⊞</span>
+                    <span>开始</span>
+                </div>
+                <div style="display:flex; gap:2px; flex:1; overflow:hidden;">
+                    <span style="background:rgba(255,255,255,0.08); padding:2px 12px; border-radius:2px; color:#d0d8e0; font-size:11px; font-family:'Segoe UI',sans-serif; border:1px solid rgba(255,255,255,0.06); cursor:default; white-space:nowrap;">📄 备忘录 - 记事本</span>
+                </div>
+                <span class="taskbar-time" id="taskbarTime">14:23</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="desktop-footer">
+        <a href="main.html" class="back-link">← 返回档案目录</a>
+    </div>
+
+    <script>
+        var SECRET_KEY = '20080827';
+        var isUnderworld = false;
+        var screen = document.getElementById('screen');
+        var tabLabel = document.getElementById('tabLabel');
+
+        var surfaceNote1 = document.getElementById('surfaceNote1');
+        var surfaceNote2 = document.getElementById('surfaceNote2');
+        var surfaceNote3 = document.getElementById('surfaceNote3');
+        var underworldNote1 = document.getElementById('underworldNote1');
+        var underworldNote2 = document.getElementById('underworldNote2');
+        var underworldNote3 = document.getElementById('underworldNote3');
+        var unlockLine = document.getElementById('unlockLine');
+
+        function toggleDesktop() {
+            isUnderworld = !isUnderworld;
+            if (isUnderworld) {
+                screen.classList.add('underworld');
+                tabLabel.innerHTML = '📂 <span class="highlight-tab">私人桌面</span>';
+                surfaceNote1.style.display = 'none';
+                surfaceNote2.style.display = 'none';
+                surfaceNote3.style.display = 'none';
+                underworldNote1.style.display = 'block';
+                underworldNote2.style.display = 'block';
+                underworldNote3.style.display = 'block';
+                unlockLine.style.display = 'block';
+            } else {
+                screen.classList.remove('underworld');
+                tabLabel.innerHTML = '📂 <span class="highlight-tab">办公桌面</span>';
+                surfaceNote1.style.display = 'block';
+                surfaceNote2.style.display = 'block';
+                surfaceNote3.style.display = 'block';
+                underworldNote1.style.display = 'none';
+                underworldNote2.style.display = 'none';
+                underworldNote3.style.display = 'none';
+                unlockLine.style.display = 'none';
+            }
+        }
+
+        function doSearch() {
+            var keyword = document.getElementById('searchInput').value.trim();
+            if (!keyword) return;
+
+            if (keyword === SECRET_KEY) {
+                toggleDesktop();
+                document.getElementById('searchInput').value = '';
+                return;
+            }
+
+            window.location.href = 'search_result.html?keyword=' + encodeURIComponent(keyword);
+        }
+
+        function updateTaskbarTime() {
+            var now = new Date();
+            var h = String(now.getHours()).padStart(2, '0');
+            var m = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('taskbarTime').textContent = h + ':' + m;
+        }
+        updateTaskbarTime();
+        setInterval(updateTaskbarTime, 30000);
+
+        window.doSearch = doSearch;
+        window.toggleDesktop = toggleDesktop;
+    </script>
+
+</body>
+</html>

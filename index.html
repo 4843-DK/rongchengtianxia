@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>匿名委托 · 荣城天下</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ededed;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #ededed;
+            padding: 10px 16px 6px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 0.5px solid #d9d9d9;
+            flex-shrink: 0;
+            min-height: 56px;
+            position: relative;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #1a1a1a;
+            font-size: 16px;
+            cursor: default;
+            min-width: 60px;
+        }
+
+        .header-left .back-icon {
+            font-size: 22px;
+            line-height: 1;
+            transform: scaleX(1.2);
+            display: inline-block;
+        }
+
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .header-center .avatar {
+            width: 38px;
+            height: 38px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .header-center .nickname {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .header-center .sub-name {
+            font-size: 10px;
+            color: #8e8e93;
+            line-height: 1.2;
+        }
+
+        .header-right {
+            font-size: 20px;
+            color: #1a1a1a;
+            cursor: default;
+            min-width: 60px;
+            text-align: right;
+            letter-spacing: 2px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 12px 16px 48px 16px;
+            /* 底部留出约 3~4 厘米的间距 */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: #ededed;
+            scroll-behavior: smooth;
+        }
+
+        .message-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .message-bubble {
+            max-width: 78%;
+            background: #ffffff;
+            padding: 10px 14px;
+            border-radius: 8px 8px 8px 4px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1a1a1a;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+            word-break: break-word;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .message-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-bubble:last-of-type {
+            border-left: none;
+        }
+
+        .folder-link {
+            color: #1a6bb0;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 400;
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            transition: color 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .folder-link:hover {
+            color: #e65c00;
+        }
+
+        .folder-link .win7-folder {
+            display: inline-block;
+            width: 16px;
+            height: 14px;
+            background: #e8c94a;
+            position: relative;
+            border-radius: 2px 2px 0 0;
+            flex-shrink: 0;
+            margin-top: -2px;
+            box-shadow: inset 0 -2px 0 #c9a82a;
+        }
+
+        .folder-link .win7-folder::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 2px;
+            width: 8px;
+            height: 4px;
+            background: #e8c94a;
+            border-radius: 2px 2px 0 0;
+            box-shadow: inset 0 1px 0 #d4b83a;
+        }
+
+        .folder-link .win7-folder::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            right: 2px;
+            height: 4px;
+            background: rgba(255, 255, 240, 0.35);
+            border-radius: 1px;
+        }
+
+        .chat-footer {
+            background: #f7f7f7;
+            padding: 8px 14px 12px 14px;
+            border-top: 0.5px solid #d9d9d9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .chat-footer .input-bar {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 14px;
+            color: #999;
+            cursor: default;
+            user-select: none;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-weight: 400;
+        }
+
+        .chat-footer .send-btn {
+            background: #e0e0e0;
+            color: #999;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 14px;
+            cursor: default;
+            user-select: none;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-weight: 400;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #e0e0e0;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #c0c0c0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 480px) {
+            .message-bubble {
+                max-width: 88%;
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .header-center .avatar {
+                width: 32px;
+                height: 32px;
+            }
+
+            .header-center .nickname {
+                font-size: 13px;
+            }
+
+            .chat-footer .input-bar {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+
+            .chat-footer .send-btn {
+                font-size: 13px;
+                padding: 6px 14px;
+            }
+
+            .chat-messages {
+                padding: 12px 12px 40px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-header">
+        <div class="header-left">
+            <span class="back-icon">‹</span>
+            <span style="font-size:15px; font-weight:400;">返回</span>
+        </div>
+        <div class="header-center">
+            <span class="avatar"></span>
+            <span class="nickname">未知号码</span>
+            <span class="sub-name">对方正在输入…</span>
+        </div>
+        <div class="header-right">⋯</div>
+    </div>
+
+    <div class="chat-messages" id="messageContainer"></div>
+
+    <div class="chat-footer">
+        <div class="input-bar">输入消息...</div>
+        <div class="send-btn">发送</div>
+    </div>
+
+    <script>
+        (function() {
+            var baseMessages = [
+                "你好。我是经人推荐，才找到你的。",
+                "我想委托你调查一件事——荣城天下三年前的那场大火。",
+                "官方的报道说那只是场意外，但我始终觉得，事情没有那么简单。",
+                "我的亲人，也在那场火里失踪了。活不见人，死不见尸。<br>我只想知道一个答案——他到底还在不在这个世界上。",
+                "这是我目前整理出来的资料。我觉得里面有很多疑点。<br>你点进去看看吧，也许你能发现我看不到的东西。",
+                '<span class="folder-link" id="folderLink"><span class="win7-folder"></span>文件夹</span>'
+            ];
+
+            var extraMessages = [
+                "对了，还有一个东西或许你用得上。",
+                "hujianren-zjb",
+                "这是我之前掌握到的一条消息。也许是个账号。",
+                "至于密码……也许他会用一个对自己有意义的日期吧。"
+            ];
+
+            var container = document.getElementById('messageContainer');
+            var currentIndex = 0;
+            var isAnimating = false;
+            var allDisplayed = false;
+            var isExtraMode = false;
+            var extraIndex = 0;
+
+            function scrollToBottom() {
+                requestAnimationFrame(function() {
+                    container.scrollTop = container.scrollHeight;
+                });
+            }
+
+            function renderMessage(html, isLast) {
+                var wrapper = document.createElement('div');
+                wrapper.className = 'message-wrapper';
+
+                var bubble = document.createElement('div');
+                bubble.className = 'message-bubble';
+                bubble.innerHTML = html;
+                wrapper.appendChild(bubble);
+                container.appendChild(wrapper);
+
+                requestAnimationFrame(function() {
+                    bubble.classList.add('show');
+                    scrollToBottom();
+                });
+
+                if (isLast) {
+                    var link = document.getElementById('folderLink');
+                    if (link) {
+                        link.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            window.location.href = 'main.html';
+                        });
+                    }
+                }
+
+                return bubble;
+            }
+
+            function showNextMessage() {
+                if (isAnimating) return;
+
+                if (!isExtraMode) {
+                    if (currentIndex < baseMessages.length) {
+                        isAnimating = true;
+                        var isLast = (currentIndex === baseMessages.length - 1);
+                        renderMessage(baseMessages[currentIndex], isLast);
+                        currentIndex++;
+
+                        setTimeout(function() {
+                            isAnimating = false;
+                        }, 400);
+
+                        if (currentIndex === baseMessages.length) {
+                            allDisplayed = true;
+                        }
+                        return;
+                    }
+
+                    if (currentIndex === baseMessages.length) {
+                        isExtraMode = true;
+                        extraIndex = 0;
+                        showExtraMessage(true);
+                        return;
+                    }
+                }
+
+                if (isExtraMode) {
+                    showExtraMessage(false);
+                }
+            }
+
+            function showExtraMessage(auto) {
+                if (extraIndex >= extraMessages.length) {
+                    allDisplayed = true;
+                    return;
+                }
+
+                if (isAnimating) return;
+
+                isAnimating = true;
+                var html = extraMessages[extraIndex];
+                renderMessage(html, false);
+                extraIndex++;
+
+                setTimeout(function() {
+                    isAnimating = false;
+                }, 400);
+
+                if (extraIndex === extraMessages.length) {
+                    allDisplayed = true;
+                }
+            }
+
+            function renderAllBaseMessages() {
+                for (var i = 0; i < baseMessages.length; i++) {
+                    var isLast = (i === baseMessages.length - 1);
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'message-wrapper';
+                    var bubble = document.createElement('div');
+                    bubble.className = 'message-bubble show';
+                    bubble.innerHTML = baseMessages[i];
+                    wrapper.appendChild(bubble);
+                    container.appendChild(wrapper);
+
+                    if (isLast) {
+                        var link = document.getElementById('folderLink');
+                        if (link) {
+                            link.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                window.location.href = 'main.html';
+                            });
+                        }
+                    }
+                }
+                currentIndex = baseMessages.length;
+
+                setTimeout(function() {
+                    var html = extraMessages[0];
+                    renderMessage(html, false);
+                    extraIndex = 1;
+                    isExtraMode = true;
+                    scrollToBottom();
+
+                    setTimeout(function() {
+                        isAnimating = false;
+                    }, 500);
+                }, 600);
+            }
+
+            function handleClick(e) {
+                if (e.target && e.target.closest && e.target.closest('#folderLink')) return;
+                showNextMessage();
+            }
+
+            function isAccountMode() {
+                return window.location.search.indexOf('new=account') !== -1;
+            }
+
+            if (isAccountMode()) {
+                renderAllBaseMessages();
+                document.addEventListener('click', handleClick);
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        showNextMessage();
+                    }
+                });
+            } else {
+                setTimeout(function() {
+                    if (baseMessages.length > 0) {
+                        renderMessage(baseMessages[0], false);
+                        currentIndex = 1;
+                    }
+                }, 400);
+
+                document.addEventListener('click', handleClick);
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        showNextMessage();
+                    }
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+</html>

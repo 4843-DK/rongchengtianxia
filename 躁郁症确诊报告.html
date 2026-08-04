@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周荣 · HCL-32检测报告 · 荣城天下</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e6e9ef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            min-height: 100vh;
+            font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+        }
+
+        .global-search {
+            width: 100%;
+            max-width: 820px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .global-search input {
+            width: 200px;
+            padding: 6px 12px;
+            font-size: 13px;
+            border: 1px solid #b0a898;
+            background: #ffffff;
+            color: #1a1a1a;
+            outline: none;
+            border-radius: 2px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .global-search input:focus {
+            border-color: #3a6a9a;
+            box-shadow: 0 0 0 2px rgba(58, 106, 154, 0.15);
+        }
+
+        .global-search input::placeholder {
+            color: #9a9a8a;
+            font-size: 12px;
+        }
+
+        .global-search button {
+            padding: 6px 16px;
+            font-size: 13px;
+            border: 1px solid #b0a898;
+            background: #ffffff;
+            color: #1a1a1a;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.2s, border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .global-search button:hover {
+            background: #f0ece4;
+            border-color: #8a8a7a;
+        }
+
+        .report-container {
+            max-width: 820px;
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid #b0b8c4;
+            padding: 32px 36px 28px 36px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .hospital-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a2a3a;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .hospital-sub {
+            font-size: 14px;
+            color: #6a7a8a;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-top: 2px;
+        }
+
+        .report-title {
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            color: #1a2a3a;
+            margin: 18px 0 16px 0;
+            letter-spacing: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px 16px;
+            background: #f7f8fa;
+            padding: 14px 20px;
+            margin-bottom: 18px;
+            border-left: 4px solid #3a6a9a;
+        }
+
+        .info-grid .item {
+            display: flex;
+            gap: 4px;
+            font-size: 14px;
+            color: #1a2a3a;
+        }
+
+        .info-grid .item .label {
+            color: #6a7a8a;
+            min-width: 50px;
+        }
+
+        .info-grid .item .value {
+            color: #1a2a3a;
+            font-weight: 500;
+        }
+
+        .info-grid .item .value .highlight {
+            color: #b31b1b;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a2a3a;
+            margin: 16px 0 8px 0;
+        }
+
+        .section-body {
+            font-size: 14px;
+            line-height: 1.9;
+            color: #1a2a3a;
+            padding: 10px 16px;
+            background: #fafbfc;
+            border-left: 3px solid #d0d8e0;
+        }
+
+        .section-body strong {
+            color: #1a2a3a;
+        }
+
+        .signature-area {
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 2px solid #d0d8e0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 14px;
+            color: #1a2a3a;
+        }
+
+        .signature-area .item .label {
+            color: #6a7a8a;
+        }
+
+        .signature-area .item .sign {
+            font-family: 'KaiTi', '楷体', serif;
+            font-size: 17px;
+            letter-spacing: 3px;
+        }
+
+        .report-footer {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #e8ecf0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 12px;
+            color: #8a9aaa;
+        }
+
+        .report-footer .back-link {
+            color: #3a6a9a;
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .report-footer .back-link:hover {
+            border-bottom-color: #3a6a9a;
+        }
+
+        @media (max-width: 640px) {
+            .report-container {
+                padding: 20px 16px 18px 16px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4px 12px;
+            }
+
+            .signature-area {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .global-search input {
+                width: 140px;
+                font-size: 12px;
+                padding: 4px 10px;
+            }
+
+            .global-search button {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="global-search">
+        <input type="text" id="searchInput" placeholder="在此处搜索" onkeydown="if(event.key==='Enter'){doSearch();}">
+        <button onclick="doSearch()">搜索</button>
+    </div>
+
+    <div class="report-container">
+
+        <div class="hospital-name">三江口市第一人民医院</div>
+        <div class="hospital-sub">精神心理科 · 量表评估中心</div>
+
+        <div class="report-title">32项轻躁狂检测清单（HCL-32）结果分析报告单</div>
+
+        <div class="info-grid">
+            <div class="item"><span class="label">姓名</span><span class="value">周荣</span></div>
+            <div class="item"><span class="label">性别</span><span class="value">男</span></div>
+            <div class="item"><span class="label">年龄</span><span class="value">31岁</span></div>
+            <div class="item"><span class="label">病案号</span><span class="value">M-2009-0315</span></div>
+            <div class="item"><span class="label">科室</span><span class="value">海拉尔心理门诊</span></div>
+            <div class="item"><span class="label">总分</span><span class="value"><span class="highlight">24.00分</span></span></div>
+        </div>
+
+        <div class="section-title">得分解释</div>
+        <div class="section-body">
+            根据Angst的临界值划分，该名被试存在轻躁狂的症状，结合患者当前抑郁发作的临床表现，<strong>存在较大双相障碍（躁郁症）的可能</strong>，建议进一步详细诊断。
+        </div>
+
+        <div class="signature-area">
+            <div class="item">
+                <span class="label">审核医师</span>
+                <span class="sign">陈玉林</span>
+            </div>
+            <div class="item">
+                <span class="label">操作人</span>
+                <span class="sign">陈玉林</span>
+            </div>
+            <div class="item">
+                <span class="label">评定时间</span>
+                <span>2009-03-15</span>
+            </div>
+        </div>
+
+        <div class="report-footer">
+            <span>（本报告只作为临床参考）</span>
+            <a href="main.html" class="back-link">← 返回档案目录</a>
+        </div>
+
+    </div>
+
+    <script>
+        try {
+            localStorage.setItem('zhourongDiagnosisUnlocked', 'true');
+        } catch (e) {}
+
+        function doSearch() {
+            var keyword = document.getElementById('searchInput').value.trim();
+            if (!keyword) return;
+            window.location.href = 'search_result.html?keyword=' + encodeURIComponent(keyword);
+        }
+    </script>
+
+</body>
+</html>
