@@ -11,36 +11,36 @@
             box-sizing: border-box;
         }
 
-        body {
+        body {        正文 {
             background: #3a6a9a;
-            font-family: '宋体', 'SimSun', 'Tahoma', sans-serif;
+            font-family: '宋体', 'SimSun', 'Tahoma', sans-serif;            字体族: '宋体', 'SimSun''宋体', 'Tahoma', 无衬线字体;
             display: flex;
-            justify-content: center;
-            padding: 40px 20px;
+            justify-content: center;            对齐方式: 居中;
+            padding: 40px像素 20px像素;
             min-height: 100vh;
         }
 
         .window {
-            max-width: 820px;
+            max-width: 820px;            最大宽度: 820像素;
             width: 100%;
-            background: #ece9d8;
-            border: 2px solid #0a1a2a;
+            background: #ece9d8;            背景: #ece9d8;
+            border: 2px solid #0a1a2a;            边框: 2像素 实线 #0a1a2a;
             box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.35);
             display: flex;
             flex-direction: column;
         }
 
         .title-bar {
-            background: linear-gradient(180deg, #2a6bb0 0%, #1a4a8a 100%);
-            padding: 6px 10px 6px 14px;
+            background: linear-gradient(180deg, #2a6bb0 0%, #1a4a8a 100%);            背景: 线性渐变(180度, #2a6bb0 0%, #1a4a8a 100%);            背景: 线性渐变(180度, #2a6bb0 0%, #1a4a8a 100%);            背景: 线性渐变(180度, #2a6bb0 0%, #1a4a8a 100%);
+            padding: 6px 10px 6px 14px;            内边距: 6px 10px 6px 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: #ffffff;
             font-size: 13px;
-            font-weight: 600;
-            font-family: 'Segoe UI', '宋体', sans-serif;
-            user-select: none;
+            font-weight: 600;            字体粗细: 600;
+            font-family: 'Segoe UI', '宋体', sans-serif;            字体族: 'Segoe UI', '宋体', 无衬线字体;            字体族: 'Segoe UI', '宋体'无衬线字体;
+            user-select: none;            用户选择: 禁止;
             flex-shrink: 0;
         }
 
@@ -62,19 +62,19 @@
         .title-bar .right .win-btn {
             width: 26px;
             height: 22px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);            背景: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);            边框: 1像素 实线 rgba(255, 255, 255, 0.15);
             color: #ffffff;
             font-size: 13px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: default;
+            justify-content: center;            对齐方式: 居中;
+            cursor: default;            光标: 默认;
             transition: background 0.15s;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', sans-serif;            字体族: 'Segoe UI', 无衬线字体;
         }
 
-        .title-bar .right .win-btn:hover {
+        .title-bar .right .win-btn:hover {        .标题栏 .右侧 .窗口按钮:悬停 {
             background: rgba(255, 255, 255, 0.20);
         }
 
@@ -96,18 +96,18 @@
         }
 
         .menu-bar span {
-            cursor: default;
+            cursor: default;            光标: 默认;
             padding: 2px 0;
         }
 
-        .menu-bar span:hover {
-            text-decoration: underline;
+        .menu-bar span:hover {        .菜单栏 span:悬停 {
+            text-decoration: underline;            文本装饰: 下划线;
         }
 
-        .address-bar {
-            background: #f8f8f0;
-            padding: 4px 14px 6px 14px;
-            border-bottom: 1px solid #c8c0b0;
+        .address-bar {        .地址栏 {
+            background: #f8f8f0;            背景: #f8f8f0;
+            padding: 4px 14px 6px 14px;            内边距: 4px 14px 6px 14px;
+            border-bottom: 1px solid #c8c0b0;            下边框: 1像素 实线 #c8c0b0;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -120,23 +120,23 @@
             font-family: '宋体', sans-serif;
         }
 
-        .address-bar .url {
+        .address-bar .url {        .地址栏 .网址 {
             background: #ffffff;
-            border: 1px solid #b0a898;
-            padding: 3px 10px;
+            border: 1px solid #b0a898;            边框: 1px 实线 #b0a898;
+            padding: 3px 10px;            内边距: 3px 10px;
             flex: 1;
             font-size: 12px;
-            color: #1a1a1a;
+            color: #1a1a1a;            颜色: #1a1a1a;
             font-family: '宋体', sans-serif;
             border-radius: 2px;
             overflow: hidden;
             white-space: nowrap;
-            text-overflow: ellipsis;
+            text-overflow: ellipsis;            文本溢出: 省略号;
         }
 
         .blog-body {
-            padding: 24px 32px 20px 32px;
-            background: #f5f0e8;
+            padding: 24px 32px 20px 32px;            内边距: 24px 32px 20px 32px;
+            background: #f5f0e8;            背景: #f5f0e8;
             flex: 1;
         }
 
@@ -153,15 +153,15 @@
         }
 
         .blog-header .avatar {
-            font-size: 32px;
-            line-height: 1;
+            font-size: 32px;            字体大小: 32px;
+            line-height: 1;            行高: 1;
         }
 
         .blog-header .blog-title {
             font-size: 22px;
-            font-weight: bold;
-            color: #1a2a3a;
-            font-family: '宋体', serif;
+            font-weight: bold;            字体粗细: 粗体;
+            color: #1a2a3a;            颜色: #1a2a3a;
+            font-family: '宋体', serif;            字体系列: '宋体', 衬线体;
             letter-spacing: 2px;
         }
 
@@ -169,21 +169,21 @@
             font-size: 13px;
             color: #6a6a5a;
             margin-top: 2px;
-            font-style: italic;
-            font-family: '宋体', serif;
+            font-style: italic;            字体样式: 斜体;
+            font-family: '宋体', serif;            字体系列: '宋体', 衬线体;
         }
 
         .post {
-            background: #fcfaf5;
-            border: 1px solid #d0c8b8;
-            padding: 18px 22px 16px 22px;
+            background: #fcfaf5;            背景: #fcfaf5;
+            border: 1px solid #d0c8b8;            边框: 1像素 实线 #d0c8b8;
+            padding: 18px 22px 16px 22px;            内边距: 18像素 22像素 16像素 22像素;
             margin-bottom: 22px;
             box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .post .post-meta {
             font-size: 12px;
-            color: #7a7a6a;
+            color: #7a7a6a;            颜色: #7a7a6a;
             margin-bottom: 10px;
             font-family: '宋体', sans-serif;
             border-bottom: 1px dashed #d0c8b8;
@@ -197,8 +197,8 @@
         .post .post-body {
             font-size: 15px;
             line-height: 1.9;
-            color: #1a1a1a;
-            font-family: '宋体', serif;
+            color: #1a1a1a;            颜色: #1a1a1a;
+            font-family: '宋体', serif;            字体系列: '宋体', 衬线体;
         }
 
         .post .post-body p {
@@ -207,19 +207,19 @@
         }
 
         .post .post-body .highlight {
-            font-weight: bold;
+            font-weight: bold;            字体粗细: 粗体;
         }
 
         .post .post-body .cipher-line {
-            text-indent: 2em;
+            text-indent: 2em;            文本缩进: 2em;
             margin-bottom: 10px;
         }
 
-        .post .post-body .cipher-text {
+        .post .post-body .cipher-text {        .帖子 .帖子正文 .密文 {
             font-family: 'Courier New', monospace;
             font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 2px;
+            font-weight: bold;            字体粗细: 粗体;
+            letter-spacing: 2px;            字距: 2像素;
             color: #1a3a6a;
         }
 
@@ -232,22 +232,22 @@
 
         .private-area .private-title {
             font-size: 15px;
-            font-weight: bold;
-            color: #1a2a3a;
-            font-family: '宋体', serif;
+            font-weight: bold;            字体粗细: 粗体;
+            color: #1a2a3a;            颜色: #1a2a3a;
+            font-family: '宋体', serif;            字体系列: '宋体', 衬线体;            字体系列衬线体;
         }
 
         .private-area .private-sub {
             font-size: 12px;
             color: #8a8a7a;
             font-family: '宋体', sans-serif;
-            margin-top: 2px;
+            margin-top: 2px;            上边距: 2px;
             margin-bottom: 10px;
         }
 
         .private-area .unlock-row {
             display: flex;
-            gap: 10px;
+            gap: 10px;            间距: 10px;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -255,9 +255,9 @@
         .private-area .unlock-row input {
             padding: 6px 12px;
             font-size: 14px;
-            border: 1px solid #b0a898;
+            border: 1px solid #b0a898;            边框: 1px 实线 #b0a898;
             background: #ffffff;
-            color: #1a1a1a;
+            color: #1a1a1a;            颜色: #1a1a1a;
             font-family: '宋体', sans-serif;
             width: 200px;
         }
@@ -271,11 +271,11 @@
             padding: 6px 20px;
             font-size: 13px;
             background: #e0dcd0;
-            border: 1px solid #b0a898;
-            color: #1a1a1a;
+            border: 1px solid #b0a898;            边框: 1px 实线 #b0a898;
+            color: #1a1a1a;            颜色: #1a1a1a;
             cursor: pointer;
             font-family: '宋体', sans-serif;
-            transition: background 0.15s;
+            transition: background 0.15s;            过渡: 背景 0.15秒;
         }
 
         .private-area .unlock-row button:hover {
@@ -305,15 +305,15 @@
         }
 
         .private-posts .private-post {
-            background: #fcfaf5;
-            border: 1px solid #d0c8b8;
+            background: #fcfaf5;            背景: #fcfaf5;
+            border: 1px solid #d0c8b8;            边框: 1像素 实线 #d0c8b8;
             padding: 14px 18px 12px 18px;
             margin-bottom: 14px;
         }
 
         .private-posts .private-post .pp-meta {
             font-size: 12px;
-            color: #7a7a6a;
+            color: #7a7a6a;            颜色: #7a7a6a;
             margin-bottom: 6px;
             font-family: '宋体', sans-serif;
             border-bottom: 1px dashed #d0c8b8;
@@ -323,12 +323,12 @@
         .private-posts .private-post .pp-body {
             font-size: 14px;
             line-height: 1.8;
-            color: #1a1a1a;
-            font-family: '宋体', serif;
+            color: #1a1a1a;            颜色: #1a1a1a;
+            font-family: '宋体', serif;            字体系列: '宋体', 衬线体;
         }
 
         .private-posts .private-post .pp-body p {
-            text-indent: 2em;
+            text-indent: 2em;            文本缩进: 2em;
             margin-bottom: 8px;
         }
 
@@ -344,26 +344,26 @@
 
         .blog-footer .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            justify-content: center;            对齐方式: 居中;
+            gap: 20px;            间距: 20像素;
             margin-bottom: 4px;
         }
 
         .blog-footer .footer-links span {
             color: #3a6a9a;
-            cursor: default;
+            cursor: default;            光标: 默认;
         }
 
         .blog-footer .footer-links span:hover {
-            text-decoration: underline;
+            text-decoration: underline;            文本装饰: 下划线;
         }
 
         .toast-tip {
             position: fixed;
             bottom: 40px;
             left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: #1a2a3a;
+            transform: translateX(-50%) translateY(80px);            变换: 平移X(-50%) 平移Y(80px);
+            background: #1a2a3a;            背景: #1a2a3a;
             color: #e0e0e0;
             padding: 10px 28px;
             border-radius: 4px;
@@ -414,7 +414,7 @@
             }
 
             .menu-bar {
-                font-size: 11px;
+                font-size: 11px像素;
                 gap: 12px;
                 padding: 2px 10px;
                 flex-wrap: wrap;
@@ -500,7 +500,7 @@
                     <p>今天领导说，下周会有新项目要跟，让我做好准备。虽然还不知道具体是什么，但心里有点期待。希望能快点上手，把该学会的都学会，把该记住的都记住。</p>
 
                     <p>对了，那就用这个办法想个密码吧，写在这里算是提醒：</p>
-                    <p class="cipher-line"><span class="cipher-text">CKDQJZHL</span></p>
+                    <p class="cipher-line"><span class="cipher-text">WEXKDTBF</span></p></span></p></span></p></span></p>
                     <p>不知道以后还会不会记得这个玩法。</p>
                 </div>
             </div>
