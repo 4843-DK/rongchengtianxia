@@ -246,7 +246,7 @@
     <div class="folder-container">
 
         <div class="folder-header">
-            <div class="title">📁 文件夹</div>
+            <div class="title">📁 档案目录</div>
             <div class="stats" id="statsDisplay">
                 已解锁：<span class="num" id="unlockedCount">0</span> / <span id="totalCount">0</span>
             </div>
@@ -262,8 +262,8 @@
 
     <script>
         var fileList = [
-            { id: 'newsUnlocked', name: '《荣城天下总部大楼突发火灾 两人失踪》', category: '公开资料' },
-            { id: 'gongsizhuyeUnlocked', name: '公司主页', category: '公开资料' },
+            { id: 'newsUnlocked', name: '三江晚报《荣城天下总部大楼突发火灾 两人失踪》', category: '公开资料' },
+            { id: 'gongsizhuyeUnlocked', name: '荣城天下公司主页', category: '公开资料' },
             { id: 'hujianrenDesktopUnlocked', name: '胡建仁电脑桌面', category: '公开资料' },
 
             { id: 'tuanjianUnlocked', name: '《一场说走就走的旅行》——荣城天下东南亚团建报道', category: '往来文件' },
@@ -282,7 +282,6 @@
             { id: 'queqinDengjiUnlocked', name: '缺勤登记表', category: '人事档案' },
             { id: 'prizeUnlocked', name: '关于表彰年度优秀员工的通知', category: '人事档案' },
             { id: 'yibaoJiluUnlocked', name: '医保记录', category: '人事档案' },
-            { id: 'yibaoYanzhengUnlocked', name: '医保验证', category: '人事档案' },
             { id: 'zhangweiProfileUnlocked', name: '张薇个人资料', category: '人事档案' },
             { id: 'lihaoProfileUnlocked', name: '李昊个人资料', category: '人事档案' },
             { id: 'wangnanProfileUnlocked', name: '王楠个人资料', category: '人事档案' },
@@ -290,7 +289,7 @@
             { id: 'zhangweiBlogUnlocked', name: '薇薇安的日记', category: '人事档案' },
             { id: 'zhangweiTreatmentUnlocked', name: '员工就诊记录', category: '人事档案' },
             { id: 'zhourongMedicalUnlocked', name: '三江口市第一人民医院急诊就诊记录', category: '人事档案' },
-            { id: 'zhourongDiagnosisUnlocked', name: '三江口市第一人民医院精神心理科诊断报告', category: '人事档案' }
+            { id: 'baogaodanUnlocked', name: '三江口市第一人民医院精神心理科结果分析报告单', category: '人事档案' }
         ];
 
         var categoryOrder = ['公开资料', '往来文件', '工程记录', '人事档案'];
@@ -347,7 +346,7 @@
                 'zhangweiBlogUnlocked': '张薇博客主页.html',
                 'zhangweiTreatmentUnlocked': '张薇就诊记录.html',
                 'zhourongMedicalUnlocked': '自杀就医记录.html',
-                'zhourongDiagnosisUnlocked': '躁郁症确诊报告.html'
+                'baogaodanUnlocked': '躁郁症确诊报告.html'
             };
             return map[id] || '#';
         }

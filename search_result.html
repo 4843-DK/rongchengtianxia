@@ -191,15 +191,15 @@
             }
             .global-search input {
                 width: 140px;
-                font-size: 12px;                字体大小: 12px;
-                padding: 4px 10px;                内边距: 4px 10px;
+                font-size: 12px;
+                padding: 4px 10px;
             }
-            .global-search button {            .全局搜索 按钮 {
-                font-size: 12px;                字体大小: 12px;
-                padding: 4px 12px;                内边距: 4px 12px;
+            .global-search button {
+                font-size: 12px;
+                padding: 4px 12px;
             }
             .result-container {
-                padding: 20px 16px 18px 16px;                内边距: 20px 16px 18px 16px;
+                padding: 20px 16px 18px 16px;
             }
             .result-container .header {
                 flex-wrap: wrap;
@@ -226,7 +226,7 @@
 
     <div class="result-container" id="resultContainer"></div>
 
-    <div class="unlock-toast" id="unlockToast">📂 档案已解锁！</div>
+    <div class="unlock-toast" id="unlockToast">档案已解锁！</div>
 
     <script>
         // ============================================================
@@ -235,19 +235,19 @@
       var keywordMap = {
 
     // 东南亚团建报道
-    '三相寺': ['《一场说走就走的旅行》——荣城天下东南亚团建报道'],
+    '三相寺': ['《一场说走就走的旅行》——荣城天下东南亚团建报道',
+                    '《三相寺住持阿赞多会见宗教事务代表团》'
+],
     '东南亚': ['《一场说走就走的旅行》——荣城天下东南亚团建报道'],
     '团建': ['《一场说走就走的旅行》——荣城天下东南亚团建报道'],
 
     // 三相寺报道
-      '三相寺': ['《一场说走就走的旅行》——荣城天下东南亚团建报道',
-                    '《三相寺住持阿赞多会见宗教事务代表团》'
+      '阿赞多': ['《三相寺住持阿赞多会见宗教事务代表团》',
+                      '财务支出审批单'
 ],
 
-
     // 财务支出审批单
-    '阿赞多': ['财务支出审批单'],
-    '财务': ['财务支出审批单'],
+     '财务': ['财务支出审批单'],
 
     // 公司改造方案
     '改造': ['办公环境专项改造方案'],
@@ -274,7 +274,7 @@
     '失踪': ['《荣城天下总部大楼突发火灾 两人失踪》'],
 
     // 周荣个人资料 + 急诊就诊记录（只有这里改动了）
-    '周荣': ['周荣个人资料', '三江口市第一人民医院急诊就诊记录'],
+    '周荣': ['周荣个人资料','三江口市第一人民医院精神心理科结果分析报告单', '三江口市第一人民医院急诊就诊记录'],
 
     // 胡建仁个人资料
     '胡建仁': ['胡建仁个人资料'],
@@ -298,7 +298,8 @@
             '《荣城天下总部大楼突发火灾 两人失踪》': 'news.html',
             '周荣个人资料': '周荣个人资料.html',
             '胡建仁个人资料': '胡建仁个人资料.html',
-            '三江口市第一人民医院急诊就诊记录': '自杀就医记录.html'
+            '三江口市第一人民医院急诊就诊记录': '自杀就医记录.html',
+            '三江口市第一人民医院精神心理科结果分析报告单':'躁郁症确诊报告.html'
         };
 
         // ============================================================
@@ -314,7 +315,8 @@
             '《荣城天下总部大楼突发火灾 两人失踪》': 'newsUnlocked',
             '周荣个人资料': 'zhourongProfileUnlocked',
             '胡建仁个人资料': 'hujianrenProfileUnlocked',
-            '三江口市第一人民医院急诊就诊记录': 'zhourongMedicalUnlocked'
+            '三江口市第一人民医院急诊就诊记录': 'zhourongMedicalUnlocked',
+            '三江口市第一人民医院精神心理科结果分析报告单':'baogaodanUnlocked'
         };
 
         // ============================================================
@@ -325,7 +327,7 @@
 
         function showToast(msg) {
             var toast = document.getElementById('unlockToast');
-            toast.textContent = msg || '📂 档案已解锁！';
+            toast.textContent = msg || '档案已解锁！';
             toast.classList.add('show');
 
             if (toastTimer) {
